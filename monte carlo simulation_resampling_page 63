@@ -1,0 +1,40 @@
+# THE MONTE CARLO SIMULATION METHOD (RESAMPLING) page 63
+
+# Initialize variables
+num_trials <- 1000
+yes_count <- 0
+no_count <- 0
+
+# Repeat the process 1000 times
+for(i in 1:num_trials) { 
+  # Step 1: Put 7 blue balls (nice day)and 3 yellow balls (not nice) into urn A
+  urn_A <- c(rep("blue", 7), rep("yellow", 3))
+  
+  # Step 2: Draw 1 ball from urn A. 
+  draw_A <- sample(urn_A, 1)
+  
+  if(draw_A == "blue") {  # If blue, continue,otherwise record “no” and stop
+    
+    # Step 3: Put balls into urn B
+    urn_B <- c(rep("green", 65), rep("red", 35))
+    
+    # Step 4: Draw from urn B
+    draw_B <- sample(urn_B, 1)
+    
+    if(draw_B == "green") {
+      yes_count <- yes_count + 1
+    } else {
+      no_count <- no_count + 1
+    }
+  } else {
+    no_count <- no_count + 1
+  }
+}
+
+# Step 6: Count number of "yes" trials
+print(paste("Number of 'yes' trials:", yes_count))
+
+# Step 7: Compute probability
+probability <- yes_count / (yes_count + no_count)
+print(paste("Probability:", probability))
+
