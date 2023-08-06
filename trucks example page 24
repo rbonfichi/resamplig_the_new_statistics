@@ -1,0 +1,42 @@
+# TRUCKS EXAMPLE page 24
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Create an empty list to hold 400 numeric vectors
+num_list <- vector("list", 400)
+
+# Generate 20 numbers between 1 and 10 for each vector in the list
+for(i in 1:400) {
+  num_list[[i]] <- sample(1:10, 20, replace = TRUE)
+}
+
+# Create a vector 'b' to store the count of "1"s in each vector
+b <- sapply(num_list, function(x) sum(x == 1))
+
+# Determine the number of values in 'b' that are greater than 3
+count_gt_3 <- sum(b > 3)
+
+# Convert the count to a proportion
+proportion_gt_3 <- count_gt_3 / 400
+
+# Print the result
+print(proportion_gt_3)
+
+# results visualization and overlay of Poisson distribution
+
+# Calculate the mean of 'b'
+lambda <- mean(b); lambda
+
+# Generate a sequence of numbers from 0 to the maximum value in 'b'
+x <- 0:max(b)
+
+# Calculate the probabilities for each number in 'x' using the Poisson distribution
+poisson_probs <- dpois(x, lambda)
+
+# Plot a histogram of 'b'
+hist(b, probability = TRUE, col = "steelblue", main = "Histogram with Poisson Overlay", xlab = "Count of '1's")
+
+# Add a Poisson distribution overlay
+lines(x, poisson_probs, col = "red", lwd = 2)
+
