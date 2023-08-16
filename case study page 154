@@ -1,0 +1,28 @@
+# Case study page 154
+
+# Set random seed for reproducibility
+set.seed(123)
+
+# Number of rookies to simulate
+n_rookies <- 20
+
+# Generate random at-bats for each rookie
+at_bats <- sample(400:1100, n_rookies, replace = TRUE)
+
+# Assuming a player with more at-bats will generally have more hits, 
+# let's simulate hits as a random proportion of at-bats.
+hits <- rbinom(n_rookies, at_bats, 0.3) 
+
+# Count rookies with <= 30 hits
+fewer_than_30_hits <- sum(hits <= 30)
+
+# Calculate batting averages (assuming you want to divide by at-bats not just 400)
+averages <- hits / at_bats
+
+# Identify the rookie with the best average
+best_rookie_index <- which.max(averages)
+
+cat("Number of rookies with 30 or fewer hits:", fewer_than_30_hits, "\n")
+cat("Rookie with the best average is rookie number:", best_rookie_index, 
+    "with average:", round(averages[best_rookie_index], 3), "\n")
+
