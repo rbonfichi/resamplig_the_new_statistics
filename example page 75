@@ -1,0 +1,32 @@
+# SUM OF PROBABILITY
+
+# Put 7 blue balls (nice day), 1 black ball (snowy day) and 2 gray balls (rainy 
+# day) into an urn. 
+# You want to know the probability of a blue or a gray ball. 
+# To find this probability:
+# 1. Draw one ball and record “yes” if its color is blue or gray,“no” otherwise
+# 2. Repeat step 1 perhaps 200 times.
+# 3. Find the proportion of “yes” trials.
+
+
+set.seed(123)  # Setting a seed for reproducibility
+
+# Define the urn with the balls
+urn <- c(rep("blue", 7), "black", rep("gray", 2))
+
+n_trials <- 200  # Number of trials
+yes_count <- 0  # To count the number of times a blue or gray ball is drawn
+
+# Conduct the simulation
+for (i in 1:n_trials) {
+  drawn_ball <- sample(urn, 1)  # Draw one ball
+  
+  # Check if the drawn ball is blue or gray
+  if (drawn_ball %in% c("blue", "gray")) {
+    yes_count <- yes_count + 1
+  }
+}
+
+# Calculate the proportion of “yes” trials
+probability <- yes_count / n_trials
+print(probability)
