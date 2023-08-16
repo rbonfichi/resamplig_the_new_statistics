@@ -1,0 +1,38 @@
+# Example 8-1 page 125
+# What is the Probability of selecting four girls and one boy when selecting five
+# students from any twenty-five girls andtTwenty-five Boys? 
+# It is a sampling without replacement when there are two outcomes and the 
+# order does not matter.
+
+# Combinatorial Approach:
+# The probability can be calculated by taking the combination of selecting 4 girls
+# out of 25 and 1 boy out of 25, divided by the combination of selecting any 5 
+# students out of 50.
+
+# Using choose() function to calculate combinations
+P <- (choose(25,4) * choose(25,1)) / choose(50,5)
+P
+
+
+# Simulation Approach:
+# Simulate the selection process many times and estimate the probability by 
+# calculating the proportion of times we select 4 girls and 1 boy.
+
+set.seed(123)  # Setting a seed for reproducibility
+
+students <- c(rep("girl", 25), rep("boy", 25))
+n_simulations <- 100000
+success_count <- 0
+
+for (i in 1:n_simulations) {
+  sampled_students <- sample(students, 5)  # Sampling 5 students without replacement
+  
+  # Check if we have 4 girls and 1 boy
+  if (sum(sampled_students == "girl") == 4 && sum(sampled_students == "boy") == 1) {
+    success_count <- success_count + 1
+  }
+}
+
+P_simulated <- success_count / n_simulations
+P_simulated
+
