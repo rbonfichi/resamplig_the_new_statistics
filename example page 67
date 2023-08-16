@@ -1,0 +1,24 @@
+# A puzzle from Gardner: 
+# Shuffle a packet of four cards—two red, two black—and deal them face down in
+# a row. Two cards are picked at random, say by placing a penny on each. 
+# What is the probability that those two cards are the same color?
+
+
+
+set.seed(123)  # Setting a seed for reproducibility
+
+n_simulations <- 100000  # Number of simulations
+success_count <- 0  # To count the number of times two cards of the same color are picked
+
+for (i in 1:n_simulations) {
+  cards <- c("R", "R", "B", "B")  # Two reds and two blacks
+  sampled_cards <- sample(cards, 2, replace = FALSE)  # Sample two cards without replacement
+  
+  # Check if the two sampled cards are of the same color
+  if (sampled_cards[1] == sampled_cards[2]) {
+    success_count <- success_count + 1
+  }
+}
+
+probability <- success_count / n_simulations
+print(probability)
