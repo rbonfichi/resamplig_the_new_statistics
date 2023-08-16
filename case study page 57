@@ -1,0 +1,37 @@
+# Case study page 57
+
+# What are the chances of the Skins winning their first two games if we think 
+# that each of those games can be modeled by our urn containing six red and 
+# four green balls?
+
+# This code simulates drawing two balls with replacement a thousand times and 
+# then gives you the proportion of times both balls were green ("Win"). 
+# This proportion is an estimate of the probability that you seek.
+
+set.seed(123)  # Setting a seed for reproducibility
+
+# Step 1: Set up the urn with balls
+urn <- c(rep("Win", 6), rep("Lose", 4)) # rep("Win", 6) creates a vector of six "Win" strings:
+                                        # rep("Lose", 4) creates a vector of four "Lose" strings
+                                        # and c(...) combines these two vectors into a single vector.
+
+n_simulations <- 1000
+yes_count <- 0
+
+# Start the simulation loop
+for (i in 1:n_simulations) {
+  # Step 2: Draw the first ball and replace it
+  first_draw <- sample(urn, 1)
+  
+  # Step 3: Draw the second ball 
+  second_draw <- sample(urn, 1)
+  
+  # Step 4: Check if both drawn balls were green ("Win") 
+  if (first_draw == "Win" && second_draw == "Win") {
+    yes_count <- yes_count + 1
+  }
+}
+
+# Step 6: Calculate the proportion of “Yes” 
+probability <- yes_count / n_simulations
+probability
